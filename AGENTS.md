@@ -66,7 +66,6 @@
 ### 2.1 复刻与品牌替换规则（Hard Rules）
 
 #### 2.1.1 严格复刻的范围定义（必须）
-
 “严格复刻”指以下内容必须对齐目标站点的视觉与交互（允许使用占位图片，但不允许改变结构来迁就占位图）：
 
 - **Layout**：container 宽度、断点、栅格、gutter、section padding、组件间距与密度
@@ -77,14 +76,12 @@
 - **A11y**：focus ring、ARIA、对比度、可点击区域（建议 >= 44px）
 
 #### 2.1.2 文案品牌替换（必须逐字严格）
-
 - 中文文案：将 **“超聚变”** 替换为 **“极栈”**
 - 英文品牌：将 **“xFusion”** 替换为 **“GeeStack”**
 - 替换范围包括但不限于：页面标题、导航、按钮、页脚、SEO Title/Description、图片 alt、可下载资源名称（若存在）
 - 其他专有名词（产品名/技术名/组织名）是否替换，以 `docs/specs/ui.md` / `docs/requirements/**` 为准；未定义前不得擅自扩大替换范围
 
 #### 2.1.3 图片规则
-
 - 允许：空图片、占位图、任意来源占位图
 - 禁止：为适配占位图而改变原本布局结构（例如卡片比例、banner 高度、栅格列数、关键留白）
 - 必须：占位图也要遵守尺寸与比例约束，避免 CLS（明确 width/height 或 aspect-ratio）
@@ -96,31 +93,25 @@
 在写任何 UI 代码之前，必须完成两类检索，并落盘为可审计产物（见 2.3 UI Lockfile）。
 
 #### 2.2.1 UI/UX Pro Max Skill 检索（强制）
-
 目标：从 skill 的可检索知识库中提取可执行的 UI/UX 规则，避免“凭感觉写 UI”。
 
 要求：
-
 - 每次前端任务至少完成一轮检索（domain 检索 + stack 检索）
 - 输出必须沉淀进 Lockfile（包含关键词、检索方式/命令、命中摘要与可执行规则）
 
 最低检索域（不得少于）：
-
 - product / style / typography / color / landing / ux
 - stack: react（本项目默认 React；若改栈必须写 ADR）
 
 最低输出要求（写入 Lockfile）：
-
 - 每个 domain 至少：**3 条可执行规则 + 1 条反模式/风险点**
 
 > 工具差异说明：无论 Claude/Codex/Antigravity 是否“自动触发 skill”，本仓库仍要求显式记录检索证据（关键词与摘要）并落盘到 Lockfile，确保可审计、可复现。
 
 #### 2.2.2 目标站点结构化拆解（强制）
-
 目标：把“严格复刻”从口号变成参数化约束（tokens + 组件清单 + 交互清单）。
 
 拆解项必须覆盖：
-
 - Layout：container max-width、breakpoints、grid columns、gutter、section padding、关键组件间距
 - Typography：字体栈、字号阶梯（nav/H1/H2/H3/body/caption）、字重、行高
 - Color：背景/正文/弱文本/分隔线/按钮主色/hover/focus 色值（或近似 token）
@@ -134,24 +125,21 @@
 ### 2.3 UI Lockfile（强制产物：没有就不准进入实现）
 
 本仓库固定采用以下路径（不得另起位置）：
-
 - `docs/ui-lockfiles/<page-or-feature>.md`
 - 模板：`docs/ui-lockfiles/_template.md`
 
 规则：
-
 - 每次新增页面或可感知 UI 功能模块，必须新增/更新对应 Lockfile
 - 前端任务开始时必须先检查 Lockfile 是否存在；不存在则先按模板创建，再进入 Implement
 - Lockfile 的字段必须完整（缺字段即视为未完成检索/未完成拆解/不可实现）
 
 Lockfile 必须包含以下字段（不得省略）：
-
 1. Feature / Page 名称与范围（只写结构与边界，不写业务细节）
 2. UI/UX Pro Max 检索记录（每个 domain：关键词 + 摘要 + 3 条规则 + 1 风险点）
 3. 目标站点拆解结果（layout / typography / color / components / interactions 的参数化描述）
 4. 设计令牌（Design Tokens）：colors / typography / spacing / radius / shadow / z-index / breakpoints
 5. 组件清单与职责（layout / sections / components 的边界）
-6. 文案替换规则与 i18n 落盘策略（site.\* 前缀，双语完备）
+6. 文案替换规则与 i18n 落盘策略（site.* 前缀，双语完备）
 7. 图片占位策略（目录/命名/比例/width-height/懒加载）
 8. Verification（验收自检清单：见 2.5）
 
@@ -160,26 +148,22 @@ Lockfile 必须包含以下字段（不得省略）：
 ### 2.4 Implement（实现阶段：严格按 Lockfile 落地）
 
 #### 2.4.1 目录落位（强制）
-
 - 所有新官网 UI 必须落在：`src/main/webapp/app/site/**`
 - 平台层（与 UI 风格无关的工程设施）可放在：`src/main/webapp/app/platform/**`
 - 禁止把新 UI 写进 legacy/admin/entities/旧 shared layout 等目录
 
 #### 2.4.2 Theme 与 Tokens（强制）
-
 - 必须建立并使用 `app/site/theme/**`（Design Tokens 的唯一权威来源）
 - 颜色/间距/字体/圆角/阴影不得在组件内硬编码魔法值
 - 若确需例外（极少数计算型值），必须注释说明原因并在 Lockfile 中记录
 
 #### 2.4.3 文案与 i18n（强制）
-
 - 官网 i18n key 统一前缀：`site.*`
 - 双语必须同时存在：`zh-cn` 与 `en`
 - 出现“超聚变/xFusion”的文本必须按规则替换为“极栈/GeeStack”
 - 图片可占位，但不得改变布局结构与比例约束
 
 #### 2.4.4 功能完整（强制）
-
 - 实现前必须列出 Interaction Checklist（本次 feature 应具备的交互清单）
 - 实现后必须逐条验证，并记录在 Lockfile 的 Verification 小节
 
@@ -190,7 +174,6 @@ Lockfile 必须包含以下字段（不得省略）：
 每次前端变更必须完成以下自检，并把结果写入 PR 描述或 Lockfile 的 Verification 小节。
 
 #### 2.5.1 视觉一致性自检（必须）
-
 - 栅格/间距：container、breakpoints、gutter、section padding 与 Lockfile 一致
 - 字体层级：nav/H1/H2/body/caption 的 size/weight/line-height 一致
 - 颜色：背景/边框/分隔线/按钮 CTA/hover/focus 一致
@@ -198,7 +181,6 @@ Lockfile 必须包含以下字段（不得省略）：
 - 动画：hover/展开收起/滚动联动的 duration/easing 一致
 
 #### 2.5.2 功能完整性自检（必须）
-
 - Header/Mega Menu：打开/关闭、hover 逻辑正确、键盘可达（Tab/ESC）
 - Language Switch：中英切换后导航/按钮/关键文本一致
 - Search（若在本迭代范围内）：输入、清空、结果态、空态、可访问性
@@ -206,9 +188,7 @@ Lockfile 必须包含以下字段（不得省略）：
 - A11y：aria-label、focus ring、对比度、可点击区域
 
 #### 2.5.3 工程门槛（必须）
-
 至少执行与本次变更相关的最小集合：
-
 - `npm run lint`
 - `npm run prettier:check`
 - `npm test`（或给出明确替代验证步骤）
@@ -325,7 +305,6 @@ Lockfile 必须包含以下字段（不得省略）：
 ### 6.1 核心目录（`src/main/webapp/app/`）
 
 - `app/site/`：公司官网（Public Site，**全新 UI**）
-
   - `entry/`：官网入口容器（与 JHipster 全局路由挂载衔接）
   - `routes/`：官网路由定义、路由常量、lazy loading
   - `layout/`：Header/MegaMenu/Footer/Breadcrumb/Search/LanguageSwitch 等（全新实现）
@@ -341,7 +320,6 @@ Lockfile 必须包含以下字段（不得省略）：
   - `utils/`：官网工具（仅限 site 域使用）
 
 - `app/platform/`：前端“平台层/基础设施”（与 UI 风格无关）
-
   - `http/`：axios 拦截器、错误处理、请求封装（可复用，但需去 UI 绑定）
   - `i18n/`：i18n 基础能力与工具（不包含页面布局）
   - `store/`：Redux Toolkit 基础配置（若项目保留 Redux）
