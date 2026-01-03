@@ -93,7 +93,13 @@
 在写任何 UI 代码之前，必须完成两类检索，并落盘为可审计产物（见 2.3 UI Lockfile）。
 
 #### 2.2.1 UI/UX Pro Max Skill 检索（强制）
-目标：从 skill 的可检索知识库中提取可执行的 UI/UX 规则，避免“凭感觉写 UI”。
+目标：从 skill 的可检索知识库中提取可执行的 UI/UX 规则，避免"凭感觉写 UI"。
+
+**脚本路径（推荐）**：
+```bash
+python3 .shared/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
+python3 .shared/ui-ux-pro-max/scripts/search.py "<keyword>" --stack <stack> [-n <max_results>]
+```
 
 要求：
 - 每次前端任务至少完成一轮检索（domain 检索 + stack 检索）
