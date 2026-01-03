@@ -32,6 +32,7 @@
 - `docs/specs/security.md`
 - `docs/specs/seo.md`（建议：官网 SEO/性能/可访问性、CLS/LCP 等口径）
 - `docs/adr/0001-*.md`
+- `docs/ui-lockfiles/`（前端 UI Lockfile：每个页面/功能必须有一份；未提供/未更新则不得进入实现阶段）
 
 ---
 
@@ -100,16 +101,7 @@
 要求：
 
 - 每次前端任务至少完成一轮检索（domain 检索 + stack 检索）
-- 输出必须沉淀进 Lockfile（包含关键词、命中结果摘要与可执行规则）
-
-执行方式（根据你的工具环境三选一；但效果必须等价）：
-
-- Claude Code：通过已安装的 skills / workflows 进行检索（或在终端调用脚本）
-- Codex：通过项目内的 skills/workflows（或在终端调用脚本）
-- Gemini Antigravity：通过 `.agent/workflows/...`（或在终端调用脚本）
-
-> 若你采用脚本检索：以仓库中实际安装路径为准（常见形式是 `.../scripts/search.py`）。  
-> 每次任务必须在 Lockfile 里记录“脚本路径/命令/关键词”。
+- 输出必须沉淀进 Lockfile（包含关键词、检索方式/命令、命中摘要与可执行规则）
 
 最低检索域（不得少于）：
 
@@ -119,6 +111,8 @@
 最低输出要求（写入 Lockfile）：
 
 - 每个 domain 至少：**3 条可执行规则 + 1 条反模式/风险点**
+
+> 工具差异说明：无论 Claude/Codex/Antigravity 是否“自动触发 skill”，本仓库仍要求显式记录检索证据（关键词与摘要）并落盘到 Lockfile，确保可审计、可复现。
 
 #### 2.2.2 目标站点结构化拆解（强制）
 
@@ -138,10 +132,16 @@
 
 ### 2.3 UI Lockfile（强制产物：没有就不准进入实现）
 
-每次新增页面或实现一个“可感知 UI 功能模块”，必须新增或更新一个 Lockfile。二选一，但仓库必须固定为一种：
+本仓库固定采用以下路径（不得另起位置）：
 
-- 方案 A：`docs/ui-lockfiles/<page-or-feature>.md`
-- 方案 B：`docs/specs/ui-lock.md`（按 feature 分节）
+- `docs/ui-lockfiles/<page-or-feature>.md`
+- 模板：`docs/ui-lockfiles/_template.md`
+
+规则：
+
+- 每次新增页面或可感知 UI 功能模块，必须新增/更新对应 Lockfile
+- 前端任务开始时必须先检查 Lockfile 是否存在；不存在则先按模板创建，再进入 Implement
+- Lockfile 的字段必须完整（缺字段即视为未完成检索/未完成拆解/不可实现）
 
 Lockfile 必须包含以下字段（不得省略）：
 
@@ -404,7 +404,7 @@ Lockfile 必须包含以下字段（不得省略）：
 ## 13. 交付前自检清单（每次任务都要过）
 
 - [ ] 未参考旧 UI 布局与风格；新 UI 仅落在 `app/site/**`（或未来 `app/console/**`）
-- [ ] 已按第 2 章执行“先检索 → 再实现 → 最后自检”，并产出/更新 UI Lockfile
+- [ ] 已按第 2 章执行“先检索 → 再实现 → 最后自检”，并**新增/更新**对应 UI Lockfile（`docs/ui-lockfiles/<page-or-feature>.md`）
 - [ ] 主题令牌集中在 `site/theme/**`，未散落魔法色值/间距
 - [ ] 导航集中在 `site/navigation/**`，双语可维护
 - [ ] 旧 admin/entities UI 未作为入口或导航项出现
