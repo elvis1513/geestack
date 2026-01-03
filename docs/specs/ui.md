@@ -7,7 +7,7 @@
 > - 中文：https://www.xfusion.com/cn
 > - 英文：https://www.xfusion.com/en
 >
-> 说明：本文件以“可工程化落地”为第一目标，**不在仓库内直接粘贴对方站点的大段原文**。需要对齐的具体文案、精确布局数值、动效参数，请写入 `docs/ui-lockfiles/**`（见第 10 章）。
+> 说明：本文件以“可工程化落地”为第一目标，**不在仓库内直接粘贴对方站点的大段原文**。需要对齐的具体文案、精确布局数值、动效参数，请写入 `docs/ui-lockfiles/**`。
 
 ---
 
@@ -27,7 +27,7 @@
 ### 0.3 品牌替换（硬规则）
 - 中文：**“超聚变” → “极栈”**
 - 英文：**“xFusion” → “GeeStack”**
-- 覆盖范围：页面标题、导航、按钮、页脚、SEO meta、图片 alt、结构化数据、下载/资源标题（如有）。
+- 覆盖范围：页面标题、导航、按钮、页脚、SEO meta、图片 alt、结构化数据、资源标题（如有）。
 
 ---
 
@@ -105,6 +105,68 @@
 | `nav.contact` | `site.nav.contact` | `site.nav.contact` | `/cn/contact-us` / `/en/contact-us` | `ContactUsPage` |
 | `nav.search` | `site.nav.search` | `site.nav.search` | `/cn/search` / `/en/search` | `SearchResultPage` |
 
+### 1.5 Navigation Schema（强类型契约：必须实现）
+> 目的：让 MegaMenu、移动端抽屉、Footer sitemap、同页语言映射都由同一份数据源驱动，避免实现分裂。  
+> 落位：`app/site/navigation/**`（配置）+ `app/site/types/**`（类型）
+
+强制字段约束（示例 TypeScript）：
+
+```ts
+export type Locale = 'zh-cn' | 'en';
+
+export type RouteKey =
+  | 'home'
+  | 'product'
+  | 'material-center'
+  | 'cases'
+  | 'how-to-buy'
+  | 'contact-us'
+  | 'service'
+  | 'partners'
+  | 'support'
+  | 'about'
+  | 'news'
+  | 'search'
+  | '404';
+
+export type HrefByLocale = Record<Locale, string>;
+
+export interface FeaturedCard {
+  key: string;              // 稳定 id（用于渲染 key/埋点/测试）
+  titleKey: string;         // i18n key（site.*）
+  descKey?: string;         // i18n key（可选）
+  href: HrefByLocale;       // 必须双语齐全
+  image?: { src: string; altKey: string }; // 占位图允许为空，但结构必须保留
+}
+
+export interface NavItem {
+  key: string;              // 稳定 id（禁止随意改名）
+  labelKey: string;         // i18n key（site.nav.*）
+  routeKey: RouteKey;       // “同页映射”的唯一锚点（两种语言一致）
+  href: HrefByLocale;       // 必须双语齐全
+  external?: boolean;       // 外链
+  children?: Array<NavGroup | NavItem>;
+  featured?: FeaturedCard[];// MegaMenu 右侧推荐卡片（可选）
+  analyticsId?: string;     // 埋点（可选，但若启用则必须稳定）
+}
+
+export interface NavGroup {
+  key: string;
+  titleKey: string;         // i18n key
+  children: NavItem[];
+}
+
+export interface PrimaryNavConfig {
+  locale: Locale;           // 生成时可按 locale 导出，但底层数据必须可双语映射
+  items: NavItem[];
+}
+```
+
+硬规则：
+- `routeKey` 必须作为“同页语言映射”的唯一依据；不得用“字符串替换 /cn 为 /en”当映射策略。
+- `href[zh-cn]` 与 `href[en]` 必须同时存在；若某语言不开放该入口，必须在配置层显式标记并在 lockfile/acceptance 说明处理策略（隐藏或说明页）。
+- Footer sitemap 不得维护第二份“独立链接树”；必须复用同一份 navigation 数据或由其派生（同源）。
+
 ---
 
 ## 2. 全局布局规范（Layout）
@@ -155,7 +217,7 @@
   - 点击遮罩层
   - 点击面板外区域
   - 按下 `ESC`
-  - 鼠标移出 nav + panel 区域 `120ms` 后关闭（防抖；具体阈值可在 lockfile 锁定）
+  - 鼠标移出 nav + panel 区域 `120ms` 后关闭（防抖；阈值可在 lockfile 锁定）
 - 打开时行为：
   - body scroll lock
   - focus trap 生效
@@ -251,9 +313,53 @@
 
 ---
 
-## 3. 组件分层与目录落位（与 AGENTS 对齐）
+## 3. Layout Metrics 基线（断点 / 版心 / 栅格：必须补齐并 tokens 化）
 
-### 3.1 目录职责（强制）
+> 目的：统一全站密度，避免不同页面“看起来不像同一个站”。  
+> 要求：本章定义“默认策略与约束口径”；精确像素值可落到 `tokens` 或对应 lockfile，但不得在页面/组件中写魔法值。
+
+### 3.1 断点（Breakpoints）
+- 必须定义并在 `tokens` 输出：
+  - `xs`（手机）
+  - `sm`（大屏手机/小平板）
+  - `md`（平板）
+  - `lg`（小桌面）
+  - `xl`（桌面）
+  - `2xl`（大桌面）
+- 规则：
+  - 断点命名必须全站唯一；不得在某页面自行新增 `desktopLarge` 这类私有断点。
+  - 所有响应式行为（Header/MegaMenu/栅格/section padding）均以这些断点为准。
+
+### 3.2 版心（Container）与左右留白策略
+- 默认采用“中心版心 + 最大宽度”策略（max-width 由 tokens 定义）。
+- Header/Footer：
+  - 背景可全宽，但内容必须与版心对齐（除非 lockfile 明确要求全宽内容）。
+- MegaMenu：
+  - 面板背景全宽；内容默认按版心对齐（列数/内容宽度由 lockfile 锁定）。
+- Section（楼层）：
+  - 默认：`padding-inline` 与 `padding-block` 走 tokens 阶梯，并随断点变化（由 tokens/lockfile 定义）。
+
+### 3.3 栅格（Grid）基线
+- 默认采用 12 列栅格（推荐，便于复刻类似站点布局）。
+- 必须 tokens 化的栅格指标：
+  - `grid-columns`（默认 12）
+  - `grid-gutter`（列间距）
+  - `grid-row-gap`（行间距，若使用）
+- 规则：
+  - 页面不得私自定义“13 列”或“任意列宽”布局；特殊布局必须通过 lockfile 记录并说明原因。
+  - 所有卡片列表（cards/list/tiles）必须使用统一的 grid 工具组件（见第 4 章）。
+
+### 3.4 垂直节奏（Vertical Rhythm）基线
+- 每个页面必须呈现一致的“楼层间距节奏”（默认由 tokens 给出一组 section gap）。
+- 规则：
+  - Section 间距不得在页面里用任意 `margin-top: 72px` 解决。
+  - 若某页面需要更紧凑/更松散节奏，必须在该页面 lockfile 中显式锁定（按断点）。
+
+---
+
+## 4. 组件分层与目录落位（与 AGENTS 对齐）
+
+### 4.1 目录职责（强制）
 - `app/site/entry/**`：站点入口容器（theme/locale/router/error boundary）
 - `app/site/routes/**`：路由常量、路由表、lazy loading
 - `app/site/layout/**`：Header/MegaMenu/Footer/SearchModal/LanguageSwitch/Breadcrumb
@@ -266,7 +372,7 @@
 - `app/site/api/**`：站点 API 封装（页面不得拼 URL）
 - `app/site/content/**`（建议）：配置驱动内容（popular searches、footer links 等）
 
-### 3.2 Import 边界（硬规则）
+### 4.2 Import 边界（硬规则）
 - `app/site/**` 禁止 import：
   - `app/entities/**`
   - `app/admin/**`
@@ -274,16 +380,39 @@
   - `app/legacy/**`（如存在）
 - 若需共享能力，只能经由 `app/platform/**`（且不得引入 UI 风格耦合）。
 
+### 4.3 基础组件契约（Component Contract：必须建立）
+> 目的：避免页面私建组件导致风格漂移与重复实现。  
+> 规则：凡是跨页面出现 2 次及以上的通用 UI，必须上移到 `app/site/components/**` 或 `app/site/sections/**`。
+
+#### 4.3.1 必须提供的基础组件（最小集合）
+以下组件必须在 `app/site/components/**` 建立并复用（命名可微调，但职责不可拆散）：
+- `Button`：支持 `variant/size/disabled/loading/icon`，focus-visible 样式一致
+- `Link`：统一处理站内/外链、`rel/target`、hover/active/focus
+- `Icon`：统一 svg 渲染、尺寸阶梯（16/20/24/32…由 tokens 定义）
+- `Container`：统一版心 max-width 与左右 padding
+- `Section`：统一 section vertical padding 与标题区排版（可接受 props 覆盖但必须 tokens 化）
+- `Grid`：统一 12 列栅格、gutter、响应式列数切换
+- `Card`：统一 surface/bg/border/shadow/radius 与交互态
+- `Tabs`、`Accordion`：统一交互与 a11y（ARIA、键盘）
+- `Modal` / `Dialog`：统一 overlay、focus trap、ESC、body scroll lock
+- `Drawer`：移动端抽屉（用于 MobileNav、过滤器等）
+- `Breadcrumb`：面包屑（如 IA 要求出现）
+- `Pagination`：列表分页（如有列表页）
+
+#### 4.3.2 页面私有组件限制
+- 页面目录 `pages/<page>/components/**` 只能存放“该页面私有的组合件/特化组件”，不得重新实现 Button/Card/Grid 等基础能力。
+- 若出现“页面私有基础组件”，必须在 PR 中解释原因，并在下一次迭代上移合并（写入 TODO 与 issue）。
+
 ---
 
-## 4. 交互与动效规范（必须 tokens 化）
+## 5. 交互与动效规范（必须 tokens 化）
 
-### 4.1 交互状态（统一）
+### 5.1 交互状态（统一）
 - 所有可交互组件必须实现：
   - default / hover / active / focus-visible / disabled
 - focus-visible 必须可见且符合站点风格（不可去掉 outline 而无替代）。
 
-### 4.2 Motion Tokens（强制）
+### 5.2 Motion Tokens（强制）
 - 动效参数必须来自 tokens（禁止在组件内写魔法值）：
   - duration：fast/base/slow
   - easing：standard/emphasized
@@ -291,20 +420,20 @@
   - open/close 必须可中断（快速切换不抖动）
   - overlay 的 fade 与 panel 的 translate/scale 组合，以 lockfile 锁定
 
-### 4.3 Scroll 行为（强制明确）
+### 5.3 Scroll 行为（强制明确）
 - Header sticky 触发默认：`scrollY > 16px`（可在 lockfile 覆盖）
 - 滚动时不得造成 CLS（例如高度变化必须平滑且不推挤内容）
 
-### 4.4 Reduced Motion（强制）
+### 5.4 Reduced Motion（强制）
 - 尊重 `prefers-reduced-motion`
   - 降低/关闭非必要动画
   - 保留必要状态切换（不影响可用性）
 
 ---
 
-## 5. 主题与设计令牌（Tokens）
+## 6. 主题与设计令牌（Tokens）
 
-### 5.1 Tokens 产物（强制）
+### 6.1 Tokens 产物（强制）
 - `app/site/theme/` 必须包含：
   - `tokens.css`：导出 CSS variables（唯一权威）
   - `tokens.ts`（可选）：TS 访问封装（如需要）
@@ -313,7 +442,7 @@
   - `breakpoints.*`：断点定义（如以 TS 驱动）
 - CSS variables 前缀：`--gs-`
 
-### 5.2 Token 分类（必须覆盖）
+### 6.2 Token 分类（必须覆盖）
 - colors：bg/surface/text/muted/border/primary/primary-hover/focus/overlay
 - typography：font-family、scale（H1/H2/H3/body/caption/nav/button）、line-height、font-weight
 - spacing：阶梯（如 0/2/4/8/12/16/24/32/48/64…）
@@ -321,8 +450,9 @@
 - shadow：sm/md/lg
 - z-index：header/overlay/modal/toast
 - motion：duration/easing
+- layout metrics：breakpoints/container/grid/gutter（见第 3 章）
 
-### 5.3 禁止魔法值（硬规则）
+### 6.3 禁止魔法值（硬规则）
 - 组件与页面中禁止直接写：
   - hex/rgb 颜色
   - 任意 px 间距/圆角/阴影
@@ -332,56 +462,56 @@
 
 ---
 
-## 6. 媒体与图片占位规范（性能与结构一致性）
+## 7. 媒体与图片占位规范（性能与结构一致性）
 
-### 6.1 占位图规则
+### 7.1 占位图规则
 - 允许占位图，但**不得为了占位图调整布局结构**（栅格列数、banner 高度、卡片比例等必须按 lockfile）。
 - 所有图片必须具备明确比例与尺寸策略（防 CLS）。
 
-### 6.2 防 CLS（强制）
+### 7.2 防 CLS（强制）
 - `<img>` 必须提供 `width/height` 或 `aspect-ratio`
 - 轮播/首屏 banner：必须锁定容器高度策略（按断点在 lockfile 写明）
 - 非首屏默认 `loading="lazy"`
 - 首屏 LCP 图禁止 lazy，必要时 preload（详见 `seo.md`）
 
-### 6.3 LCP 目标元素（强制声明）
+### 7.3 LCP 目标元素（强制声明）
 - 首页 LCP 元素必须在 `docs/ui-lockfiles/home.md` 声明（例如首屏 Hero 的主视觉/标题块）。
 - 任何导致 LCP 目标变化的调整都必须更新 lockfile 与验收项。
 
 ---
 
-## 7. 文案与 i18n 规则
+## 8. 文案与 i18n 规则
 
-### 7.1 i18n Key 命名（强制）
+### 8.1 i18n Key 命名（强制）
 - 官网统一前缀：`site.*`
 - 导航：`site.nav.*`
 - Footer：`site.footer.*`
 - 通用按钮/文案：`site.common.*`
 - 页面级：`site.pages.<page>.*`
 
-### 7.2 Fallback 策略（强制）
+### 8.2 Fallback 策略（强制）
 - 默认语言：zh-cn
 - 若某 key 缺失：
   - 开发环境：必须可见告警（例如显示 `[MISSING] key`）
   - 生产环境：fallback 到默认语言 key（但必须记录缺失并修复）
 
-### 7.3 内容落位
+### 8.3 内容落位
 - 结构型内容（导航树、footer 链接、popular searches）：放 `site/navigation/**` 或 `site/content/**`
 - 大段内容（若未来需要）：优先后端驱动或 markdown 内容系统（需 ADR）
 
 ---
 
-## 8. SEO/性能/A11y 对接入口
+## 9. SEO/性能/A11y 对接入口
 - SEO / Meta / hreflang / sitemap / robots：见 `docs/specs/seo.md`
 - 性能预算（LCP/CLS/INP）与测量方法：见 `docs/specs/seo.md`
 - 安全（CSP/headers/表单安全）：见 `docs/specs/security.md`
 
 ---
 
-## 9. 页面与模块清单（建议拆锁）
+## 10. 页面与模块清单（建议拆锁）
 > 复刻落地必须把“最容易漂移的模块”单独锁定成独立 lockfile。
 
-### 9.1 必备 lockfiles（P0 推荐）
+### 10.1 必备 lockfiles（P0 推荐）
 - `docs/ui-lockfiles/header-megamenu.md`
 - `docs/ui-lockfiles/footer.md`
 - `docs/ui-lockfiles/home.md`
@@ -395,13 +525,15 @@
 
 ---
 
-## 10. UI Lockfiles（强制机制：无 lockfile 不实现）
+## 11. UI Lockfiles（强制机制：无 lockfile 不实现）
 
-### 10.1 路径与命名
+### 11.1 路径与命名
 - 目录：`docs/ui-lockfiles/`
-- 文件命名：kebab-case，与路由/模块对应（见第 9 章）
+- 文件命名：kebab-case，与路由/模块对应（见第 10 章）
 
-### 10.2 每个 lockfile 的固定字段（缺一不可）
+### 11.2 每个 lockfile 的固定字段（缺一不可）
+> 你已拥有 `_TEMPLATE.md`，本节只做“字段集合硬约束”，不重复模板内容。
+
 1. Reference URLs（cn/en）
 2. Layout Tree（sections + 组件树）
 3. Grid & Spacing（container/columns/gutter/section padding，按断点）
@@ -414,7 +546,7 @@
 
 ---
 
-## 11. Definition of Done（UI 维度）
+## 12. Definition of Done（UI 维度）
 - 已存在并更新对应 lockfile
 - UI 全部落在 `app/site/**`
 - tokens 驱动：无魔法色值/间距/动效
