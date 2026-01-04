@@ -1,0 +1,112 @@
+{
+  "company": {
+    "name": "Henan GeeStack Information Technology Co., Ltd.",
+    "shortName": "GeeStack",
+    "englishName": "GeeStack"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products & Solutions",
+    "resources": "Resources",
+    "cases": "Cases",
+    "services": "Services",
+    "partners": "Partners",
+    "support": "Support",
+    "about": "About GeeStack",
+    "news": "News & Events",
+    "contact": "Contact Us",
+    "search": "Search",
+    "howToBuy": "How to Buy"
+  },
+  "footer": {
+    "about": "About GeeStack",
+    "company": "Company",
+    "quality": "Quality",
+    "compliance": "Compliance",
+    "careers": "Careers",
+    "news": "News & Events",
+    "newsList": "News",
+    "events": "Events",
+    "products": "Products & Solutions",
+    "productList": "Products",
+    "ecosystem": "Ecosystem & Services",
+    "partners": "Partners",
+    "becomePartner": "Become a Partner",
+    "partnerPolicy": "Partner Policy",
+    "partnerSupport": "Partner Support",
+    "resources": "Resources",
+    "documents": "Documents",
+    "cases": "Cases",
+    "media": "Media Center",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "optOut": "Opt-Out"
+    },
+    "copyright": "Copyright © Henan GeeStack Information Technology Co., Ltd.",
+    "icp": "豫ICP备XXXXXXXX号"
+  },
+  "common": {
+    "readMore": "Read More",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "download": "Download",
+    "contactUs": "Contact Us",
+    "getStarted": "Get Started",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "searchPlaceholder": "Search products, resources, cases...",
+    "noResults": "No results found",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry"
+  },
+  "pages": {
+    "home": {
+      "title": "Home - GeeStack",
+      "hero": {
+        "title": "Leading Digital Transformation Innovation",
+        "subtitle": "Comprehensive technology solutions for enterprises"
+      }
+    },
+    "products": {
+      "title": "Products & Solutions - GeeStack",
+      "hero": {
+        "title": "Products & Solutions",
+        "subtitle": "Empowering enterprise digital transformation"
+      }
+    },
+    "resources": {
+      "title": "Resources - GeeStack",
+      "hero": {
+        "title": "Resources",
+        "subtitle": "Rich technical documentation"
+      }
+    },
+    "cases": {
+      "title": "Cases - GeeStack",
+      "hero": {
+        "title": "Cases",
+        "subtitle": "Success stories"
+      }
+    },
+    "contact": {
+      "title": "Contact Us - GeeStack",
+      "hero": {
+        "title": "Contact Us",
+        "subtitle": "Looking forward to working with you"
+      },
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "company": "Company",
+        "message": "Message",
+        "submit": "Submit",
+        "success": "Submitted successfully! We will contact you soon."
+      }
+    }
+  }
+}

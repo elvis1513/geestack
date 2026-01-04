@@ -1,0 +1,112 @@
+{
+  "company": {
+    "name": "河南极栈信息技术有限公司",
+    "shortName": "极栈",
+    "englishName": "GeeStack"
+  },
+  "nav": {
+    "home": "首页",
+    "products": "产品与解决方案",
+    "resources": "资料中心",
+    "cases": "案例中心",
+    "services": "服务",
+    "partners": "合作伙伴",
+    "support": "技术支持",
+    "about": "关于极栈",
+    "news": "新闻与活动",
+    "contact": "联系我们",
+    "search": "搜索",
+    "howToBuy": "如何购买"
+  },
+  "footer": {
+    "about": "关于极栈",
+    "company": "公司简介",
+    "quality": "质量管理",
+    "compliance": "合规诚信",
+    "careers": "招贤纳士",
+    "news": "新闻与活动",
+    "newsList": "新闻公告",
+    "events": "市场活动",
+    "products": "产品与解决方案",
+    "productList": "产品",
+    "ecosystem": "生态创新及服务",
+    "partners": "合作伙伴",
+    "becomePartner": "成为合作伙伴",
+    "partnerPolicy": "伙伴政策",
+    "partnerSupport": "伙伴支持",
+    "resources": "资源中心",
+    "documents": "资料中心",
+    "cases": "案例中心",
+    "media": "多媒体中心",
+    "legal": {
+      "privacy": "隐私政策",
+      "terms": "使用条款",
+      "optOut": "除名查询"
+    },
+    "copyright": "河南极栈信息技术有限公司 版权所有",
+    "icp": "豫ICP备XXXXXXXX号"
+  },
+  "common": {
+    "readMore": "了解更多",
+    "learnMore": "详情",
+    "viewAll": "查看全部",
+    "download": "下载",
+    "contactUs": "联系我们",
+    "getStarted": "开始使用",
+    "back": "返回",
+    "next": "下一页",
+    "previous": "上一页",
+    "search": "搜索",
+    "searchPlaceholder": "搜索产品、资料、案例...",
+    "noResults": "未找到相关结果",
+    "loading": "加载中...",
+    "error": "出错了",
+    "retry": "重试"
+  },
+  "pages": {
+    "home": {
+      "title": "首页 - 极栈",
+      "hero": {
+        "title": "引领数字化转型创新",
+        "subtitle": "为企业提供全面的技术解决方案"
+      }
+    },
+    "products": {
+      "title": "产品与解决方案 - 极栈",
+      "hero": {
+        "title": "产品与解决方案",
+        "subtitle": "助力企业数字化转型"
+      }
+    },
+    "resources": {
+      "title": "资料中心 - 极栈",
+      "hero": {
+        "title": "资料中心",
+        "subtitle": "丰富的技术资料与文档"
+      }
+    },
+    "cases": {
+      "title": "案例中心 - 极栈",
+      "hero": {
+        "title": "案例中心",
+        "subtitle": "成功案例分享"
+      }
+    },
+    "contact": {
+      "title": "联系我们 - 极栈",
+      "hero": {
+        "title": "联系我们",
+        "subtitle": "期待与您合作"
+      },
+      "form": {
+        "name": "姓名",
+        "email": "邮箱",
+        "phone": "电话",
+        "company": "公司",
+        "message": "留言",
+        "submit": "提交",
+        "success": "提交成功,我们会尽快与您联系!"
+      }
+    }
+  }
+}
