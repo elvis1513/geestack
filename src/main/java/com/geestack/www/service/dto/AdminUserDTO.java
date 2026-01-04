@@ -35,7 +35,7 @@ public class AdminUserDTO extends UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
-        this.activated = user.getActivated();
+        this.activated = user.isActivated();
         this.langKey = user.getLangKey();
         this.imageUrl = user.getImageUrl();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
