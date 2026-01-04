@@ -43,10 +43,19 @@ export const siteRoutes: SiteRoute[] = [
     component: SiteEntry,
   },
 
-  // Future routes (to be implemented):
-  // Products
-  // { path: '/cn/products-and-solutions', locale: 'zh-cn', routeKey: 'products', component: SiteEntry },
-  // { path: '/en/products-and-solutions', locale: 'en', routeKey: 'products', component: SiteEntry },
+  // Products & Solutions
+  {
+    path: '/cn/products-and-solutions',
+    locale: 'zh-cn',
+    routeKey: 'products',
+    component: SiteEntry,
+  },
+  {
+    path: '/en/products-and-solutions',
+    locale: 'en',
+    routeKey: 'products',
+    component: SiteEntry,
+  },
 
   // Services
   // { path: '/cn/services', locale: 'zh-cn', routeKey: 'services', component: SiteEntry },
