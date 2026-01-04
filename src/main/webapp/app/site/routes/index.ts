@@ -57,6 +57,20 @@ export const siteRoutes: SiteRoute[] = [
     component: SiteEntry,
   },
 
+  // Resources
+  {
+    path: '/cn/resources',
+    locale: 'zh-cn',
+    routeKey: 'resources',
+    component: SiteEntry,
+  },
+  {
+    path: '/en/resources',
+    locale: 'en',
+    routeKey: 'resources',
+    component: SiteEntry,
+  },
+
   // Services
   // { path: '/cn/services', locale: 'zh-cn', routeKey: 'services', component: SiteEntry },
   // { path: '/en/services', locale: 'en', routeKey: 'services', component: SiteEntry },
