@@ -15,6 +15,8 @@ import { HomePage } from '../pages/home';
 import { ProductsPage } from '../pages/products';
 import { ResourcesPage } from '../pages/resources';
 import { CasesPage } from '../pages/cases';
+import { ContactPage } from '../pages/contact';
+import { NotFoundPage } from '../pages/not-found';
 import type { HeaderProps } from '../layout/Header';
 import type { FooterProps } from '../layout/Footer';
 import * as styles from './SiteEntry.module.css';
@@ -78,6 +80,10 @@ export const SiteEntry: React.FC<SiteEntryProps> = ({ locale: initialLocale = 'z
   // Render page based on routeKey
   const renderPage = () => {
     switch (routeKey) {
+      case 'not-found':
+        return <NotFoundPage locale={locale} />;
+      case 'contact':
+        return <ContactPage locale={locale} />;
       case 'cases':
         return <CasesPage locale={locale} />;
       case 'resources':

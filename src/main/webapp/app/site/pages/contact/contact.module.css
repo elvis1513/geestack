@@ -1,0 +1,82 @@
+/**
+ * Contact Page Styles
+ */
+
+.contactPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero */
+.hero {
+  padding: 80px var(--gap-md) 60px;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: var(--color-text-inverse);
+}
+
+.heroContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.4;
+  margin: 0 0 var(--gap-md);
+  color: var(--color-text-inverse);
+}
+
+.heroSubtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--color-text-inverse);
+  opacity: 0.9;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 60px var(--gap-sm) 40px;
+  }
+
+  .heroTitle {
+    font-size: 32px;
+  }
+
+  .heroSubtitle {
+    font-size: 16px;
+  }
+}
+
+/* Cards Section */
+.cardsSection {
+  padding: 64px var(--gap-md);
+  background: var(--color-surface);
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1023px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardsSection {
+    padding: 48px var(--gap-sm);
+  }
+}

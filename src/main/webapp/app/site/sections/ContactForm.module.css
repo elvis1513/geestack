@@ -1,0 +1,90 @@
+/**
+ * Contact Form Styles
+ */
+
+.formSection {
+  padding: 64px var(--gap-md);
+  background: var(--color-surface);
+}
+
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.label {
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.input,
+.textarea {
+  padding: var(--gap-sm);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-link);
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.submitButton {
+  padding: var(--gap-sm) var(--gap-lg);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-inverse);
+  background: var(--color-link);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.submitButton:hover {
+  background: var(--color-link-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+  .formSection {
+    padding: 48px var(--gap-sm);
+  }
+
+  .form {
+    gap: var(--gap-sm);
+  }
+}

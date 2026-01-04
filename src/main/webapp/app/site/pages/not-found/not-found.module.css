@@ -1,0 +1,118 @@
+/**
+ * 404 Not Found Page Styles
+ */
+
+.notFoundPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px var(--gap-md) 80px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: var(--color-text-inverse);
+}
+
+.container {
+  max-width: 600px;
+  text-align: center;
+}
+
+.errorCode {
+  font-size: 120px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-text-inverse);
+  opacity: 0.3;
+  margin-bottom: var(--gap-md);
+}
+
+.title {
+  font-size: 48px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+  margin: 0 0 var(--gap-md);
+  color: var(--color-text-inverse);
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 var(--gap-lg);
+  color: var(--color-text-inverse);
+  opacity: 0.8;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: var(--gap-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: var(--gap-sm) var(--gap-lg);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+  white-space: nowrap;
+}
+
+.primaryButton {
+  color: var(--color-text-inverse);
+  background: var(--color-link);
+}
+
+.primaryButton:hover {
+  background: var(--color-link-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.secondaryButton {
+  color: var(--color-text-inverse);
+  background: transparent;
+  border: 1px solid var(--color-text-inverse);
+}
+
+.secondaryButton:hover {
+  background: var(--color-text-inverse);
+  color: #1e3c72;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 80px var(--gap-sm) 60px;
+  }
+
+  .errorCode {
+    font-size: 80px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}

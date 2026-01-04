@@ -85,6 +85,20 @@ export const siteRoutes: SiteRoute[] = [
     component: SiteEntry,
   },
 
+  // Contact
+  {
+    path: '/cn/contact',
+    locale: 'zh-cn',
+    routeKey: 'contact',
+    component: SiteEntry,
+  },
+  {
+    path: '/en/contact',
+    locale: 'en',
+    routeKey: 'contact',
+    component: SiteEntry,
+  },
+
   // Services
   // { path: '/cn/services', locale: 'zh-cn', routeKey: 'services', component: SiteEntry },
   // { path: '/en/services', locale: 'en', routeKey: 'services', component: SiteEntry },
