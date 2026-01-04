@@ -1,0 +1,148 @@
+/**
+ * Cases Page Styles
+ */
+
+.casesPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero */
+.hero {
+  padding: 80px var(--gap-md) 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: var(--color-text-inverse);
+}
+
+.heroContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.4;
+  margin: 0 0 var(--gap-md);
+  color: var(--color-text-inverse);
+}
+
+.heroSubtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--color-text-inverse);
+  opacity: 0.9;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 60px var(--gap-sm) 40px;
+  }
+
+  .heroTitle {
+    font-size: 32px;
+  }
+
+  .heroSubtitle {
+    font-size: 16px;
+  }
+}
+
+/* Filters Section */
+.filtersSection {
+  padding: 32px var(--gap-md);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cases Section */
+.casesSection {
+  padding: 48px var(--gap-md) 64px;
+  background: var(--color-surface);
+}
+
+.casesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1023px) {
+  .casesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .casesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .casesSection {
+    padding: 32px var(--gap-sm) 48px;
+  }
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 64px var(--gap-md);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.ctaContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: 28px;
+  font-weight: var(--font-weight-semibold);
+  margin: 0 0 var(--gap-sm);
+  color: var(--color-text);
+}
+
+.ctaSubtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 var(--gap-md);
+  color: var(--color-text-secondary);
+}
+
+.ctaButton {
+  padding: var(--gap-sm) var(--gap-lg);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-inverse);
+  background: var(--color-link);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.ctaButton:hover {
+  background: var(--color-link-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 767px) {
+  .ctaSection {
+    padding: 48px var(--gap-sm);
+  }
+
+  .ctaTitle {
+    font-size: 24px;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+}

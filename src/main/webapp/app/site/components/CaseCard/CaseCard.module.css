@@ -1,0 +1,80 @@
+/**
+ * Case Card Styles
+ */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+}
+
+.content {
+  padding: var(--gap-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  flex: 1;
+}
+
+.industry {
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.customer {
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+  flex: 1;
+}
+
+.detailsButton {
+  align-self: flex-start;
+  padding: var(--gap-xs) var(--gap-sm);
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-link);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.detailsButton:hover {
+  background: var(--color-background-hover);
+  color: var(--color-link-hover);
+}
