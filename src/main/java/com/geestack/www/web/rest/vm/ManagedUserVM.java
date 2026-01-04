@@ -1,5 +1,6 @@
 package com.geestack.www.web.rest.vm;
 
+import com.geestack.www.config.Constants;
 import com.geestack.www.service.dto.AdminUserDTO;
 import jakarta.validation.constraints.Size;
 
@@ -9,11 +10,15 @@ import jakarta.validation.constraints.Size;
 public class ManagedUserVM extends AdminUserDTO {
 
     public static final int PASSWORD_MIN_LENGTH = 4;
-
     public static final int PASSWORD_MAX_LENGTH = 100;
 
-    @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String imageUrl;
 
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
@@ -23,13 +28,32 @@ public class ManagedUserVM extends AdminUserDTO {
         return password;
     }
 
+    @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     public void setPassword(String password) {
         this.password = password;
     }
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "ManagedUserVM{" + super.toString() + "} ";
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

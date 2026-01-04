@@ -148,7 +148,7 @@ export const CasesPage: React.FC<CasesPageProps> = ({ locale = 'zh-cn' }) => {
       <CasesHero locale={locale} />
 
       <section className={styles.filtersSection} aria-label="Filter cases by industry">
-        <IndustryFilters industries={industries} activeIndustry={activeIndustry} onIndustryChange={setActiveIndustry} locale={locale} />
+        <IndustryFilters industries={industries} activeIndustry={activeIndustry} onIndustryChange={setActiveIndustry} />
       </section>
 
       <section className={styles.casesSection} aria-label="Case studies">

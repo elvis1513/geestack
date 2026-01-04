@@ -1,39 +1,25 @@
-export type HeaderMessage = {
-  /** Success message */
+/**
+ * HTTP Headers utilities
+ * Extracts messages from response headers
+ */
+
+export interface MessageFromHeaders {
   alert?: string;
-  /** Error message */
-  error?: string;
-  /** Entity id for success messages. Entity name for error messages. */
   param?: string;
-};
+  error?: string;
+}
 
-const headerToString = (headerValue: any): string => {
-  if (Array.isArray(headerValue)) {
-    if (headerValue.length > 1) {
-      throw new Error('Multiple header values found');
-    }
-    headerValue = headerValue[0];
-  }
-  if (typeof headerValue !== 'string') {
-    throw new Error('Header value is not a string');
-  }
-  return headerValue;
-};
+/**
+ * Extract alert/error messages from HTTP headers
+ */
+export function getMessageFromHeaders(headers: Record<string, any>): MessageFromHeaders {
+  const alert = headers?.['x-geestackApp-alert'] ?? headers?.['x-gestackapp-alert'];
+  const error = headers?.['x-geestackApp-error'] ?? headers?.['x-gestackapp-error'];
+  const param = headers?.['x-geestackApp-params'] ?? headers?.['x-gestackapp-params'];
 
-const decodeHeaderValue = (headerValue: string): string => decodeURIComponent(headerValue.replace(/\+/g, ' '));
-
-export const getMessageFromHeaders = (headers: Record<string, any>): HeaderMessage => {
-  let alert: string | undefined = undefined;
-  let param: string | undefined = undefined;
-  let error: string | undefined = undefined;
-  for (const [key, value] of Object.entries(headers)) {
-    if (key.toLowerCase().endsWith('-alert')) {
-      alert = headerToString(value);
-    } else if (key.toLowerCase().endsWith('-error')) {
-      error = headerToString(value);
-    } else if (key.toLowerCase().endsWith('-params')) {
-      param = decodeHeaderValue(headerToString(value));
-    }
-  }
-  return { alert, error, param };
-};
+  return {
+    alert,
+    error,
+    param,
+  };
+}
