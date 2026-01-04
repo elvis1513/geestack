@@ -25,8 +25,29 @@ module.exports = async options =>
     },
     module: {
       rules: [
+        // CSS Modules for .module.css files
         {
-          test: /\.(sa|sc|c)ss$/,
+          test: /\.module\.css$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                url: false,
+                modules: {
+                  localIdentName: '[name]__[local]--[hash:base64:5]',
+                },
+              },
+            },
+            {
+              loader: 'postcss-loader',
+            },
+          ],
+        },
+        // Regular CSS for non-module files
+        {
+          test: /\.(sa|sc)ss$/,
+          exclude: /\.module\.css$/,
           use: [
             'style-loader',
             {
@@ -39,6 +60,21 @@ module.exports = async options =>
             {
               loader: 'sass-loader',
               options: { implementation: sass },
+            },
+          ],
+        },
+        // Regular .css files (non-modules, non-sass)
+        {
+          test: /\.css$/,
+          exclude: /\.module\.css$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: { url: false },
+            },
+            {
+              loader: 'postcss-loader',
             },
           ],
         },

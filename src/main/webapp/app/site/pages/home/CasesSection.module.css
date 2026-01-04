@@ -1,0 +1,122 @@
+/**
+ * Cases Section Styles
+ */
+
+.section {
+  width: 100%;
+}
+
+.title {
+  font-size: var(--font-size-h2-desktop);
+  line-height: var(--line-height-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--gap-3xl) 0;
+}
+
+.caseCard {
+  display: flex;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.caseCard:hover {
+  border-color: var(--color-link-hover);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.image {
+  flex: 0 0 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-bg-alt);
+  min-height: 300px;
+}
+
+.content {
+  flex: 1;
+  padding: var(--gap-3xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.industry {
+  display: inline-block;
+  padding: var(--gap-xs) var(--gap-md);
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-link-hover);
+  background: rgba(247, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-bottom: var(--gap-lg);
+  align-self: flex-start;
+}
+
+.caseTitle {
+  font-size: var(--font-size-h3-desktop);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--gap-md) 0;
+}
+
+.caseDescription {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--gap-2xl) 0;
+  flex: 1;
+}
+
+.cta {
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-link-hover);
+  align-self: flex-start;
+}
+
+.footer {
+  margin-top: var(--gap-2xl);
+  text-align: center;
+}
+
+.viewAll {
+  display: inline-block;
+  padding: var(--gap-md) var(--gap-3xl);
+  font-size: 16px;
+  color: var(--color-text);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.viewAll:hover {
+  color: var(--color-text-inverse);
+  background: var(--color-text);
+  border-color: var(--color-text);
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .title {
+    font-size: var(--font-size-h2-mobile);
+  }
+
+  .caseCard {
+    flex-direction: column;
+  }
+
+  .image {
+    min-height: 200px;
+  }
+
+  .content {
+    padding: var(--gap-2xl);
+  }
+}

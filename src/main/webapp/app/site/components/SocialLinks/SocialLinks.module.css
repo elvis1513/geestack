@@ -1,0 +1,72 @@
+/**
+ * Social Links Styles
+ */
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.link:hover {
+  color: var(--color-link-hover);
+  border-color: var(--color-link-hover);
+  background: var(--color-bg-alt);
+  transform: translateY(-2px);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Size variants */
+.sm .link {
+  width: 32px;
+  height: 32px;
+}
+
+.sm .icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.md .link {
+  width: 40px;
+  height: 40px;
+}
+
+.md .icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.lg .link {
+  width: 48px;
+  height: 48px;
+}
+
+.lg .icon svg {
+  width: 22px;
+  height: 22px;
+}

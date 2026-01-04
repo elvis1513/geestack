@@ -1,0 +1,111 @@
+/**
+ * GeeStack Design System CSS Variables
+ *
+ * Mirrors TypeScript tokens in app/site/theme/tokens/
+ * Use these CSS variables in styled-components or CSS modules
+ */
+
+:root {
+  /* ========== Spacing ========== */
+  --spacing-container-max-width: 1200px;
+  --spacing-container-padding-desktop: 36px;
+  --spacing-container-padding-mobile: 16px;
+  --spacing-section-desktop: 64px;
+  --spacing-section-mobile: 40px;
+  --spacing-gutter-desktop: 24px;
+  --spacing-gutter-mobile: 16px;
+
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 12px;
+  --gap-lg: 16px;
+  --gap-xl: 24px;
+  --gap-2xl: 32px;
+  --gap-3xl: 48px;
+  --gap-4xl: 64px;
+  --gap-5xl: 80px;
+
+  /* ========== Breakpoints ========== */
+  --bp-sm: 375px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1200px;
+  --bp-2xl: 1440px;
+
+  /* ========== Colors ========== */
+  --color-text: #333333;
+  --color-text-muted: #666666;
+  --color-text-light: #999999;
+  --color-text-inverse: #ffffff;
+
+  --color-bg: #ffffff;
+  --color-bg-alt: #f5f5f5;
+  --color-bg-overlay: rgba(0, 0, 0, 0.5);
+
+  --color-border: #e0e0e0;
+  --color-border-light: #f0f0f0;
+
+  --color-cta-primary: #f70000;
+  --color-cta-primary-hover: #d90000;
+  --color-cta-secondary: #333333;
+
+  --color-link: #333333;
+  --color-link-hover: #f70000;
+
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-error: #f5222d;
+  --color-info: #1890ff;
+
+  /* ========== Typography ========== */
+  --font-family-zh: 'Microsoft YaHei', Arial, 'PingFang SC', sans-serif;
+  --font-family-en: Arial, 'Microsoft YaHei', PingFangSC, sans-serif;
+
+  --font-size-h1-desktop: 60px;
+  --font-size-h1-mobile: 30px;
+  --font-size-h2-desktop: 48px;
+  --font-size-h2-mobile: 28px;
+  --font-size-h3-desktop: 24px;
+  --font-size-h3-mobile: 20px;
+  --font-size-h4-desktop: 20px;
+  --font-size-h4-mobile: 18px;
+  --font-size-body: 14px;
+  --font-size-small: 12px;
+
+  --line-height-h1-desktop: 1.4;
+  --line-height-h1-mobile: 1.2;
+  --line-height-h2: 1.4;
+  --line-height-h3: 1.5;
+  --line-height-body: 1.4;
+  --line-height-small: 1.5;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* ========== Motion ========== */
+  --motion-duration-fast: 150ms;
+  --motion-duration-normal: 250ms;
+  --motion-duration-slow: 350ms;
+
+  --motion-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-easing-in: cubic-bezier(0.4, 0, 1, 1);
+  --motion-easing-out: cubic-bezier(0, 0, 0.2, 1);
+  --motion-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ========== Z-Index ========== */
+  --z-index-header: 99;
+  --z-index-mega-menu: 100;
+  --z-index-dropdown: 101;
+  --z-index-modal: 1000;
+  --z-index-toast: 1100;
+
+  /* ========== Layout ========== */
+  --header-height: 80px;
+  --grid-columns: 12;
+}
+
+/* Dark mode support (future) */
+@media (prefers-color-scheme: dark) {
+  /* :root { ... } */
+}

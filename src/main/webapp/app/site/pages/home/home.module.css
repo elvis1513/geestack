@@ -1,0 +1,35 @@
+/**
+ * Home Page Styles
+ */
+
+.homePage {
+  padding-top: var(--header-height);
+}
+
+.section {
+  padding: var(--spacing-section-desktop) 0;
+  background: var(--color-bg);
+}
+
+.sectionAlt {
+  padding: var(--spacing-section-desktop) 0;
+  background: var(--color-bg-alt);
+}
+
+.container {
+  max-width: var(--spacing-container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-container-padding-desktop);
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .section,
+  .sectionAlt {
+    padding: var(--spacing-section-mobile) 0;
+  }
+
+  .container {
+    padding: 0 var(--spacing-container-padding-mobile);
+  }
+}
