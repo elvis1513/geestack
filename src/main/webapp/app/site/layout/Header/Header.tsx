@@ -7,16 +7,18 @@
  * - Transparent at top, white + shadow on scroll
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { tokens } from '../../theme';
 import { siteNavigation } from '../../navigation/config';
 import { HeaderProps, NavItem } from './types';
 import { MegaMenu } from './MegaMenu';
+import { SearchModal } from '../SearchModal';
 import * as styles from './Header.module.css';
 
 export const Header: React.FC<HeaderProps> = ({ locale = 'zh-cn', currentPath = '/', onLocaleChange }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [activeNavItem, setActiveNavItem] = useState<string | null>(null);
   const hoverTimeoutRef = useRef<number | null>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -31,6 +33,19 @@ export const Header: React.FC<HeaderProps> = ({ locale = 'zh-cn', currentPath = 
     handleScroll(); // Initial check
 
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Global keyboard shortcut: Cmd+K / Ctrl+K to open search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchModalOpen(true);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   // Clear hover timeout on unmount
@@ -133,13 +148,7 @@ export const Header: React.FC<HeaderProps> = ({ locale = 'zh-cn', currentPath = 
         {/* Right Actions (Language Switch, Search) */}
         <div className={styles.actions}>
           {/* Search Icon */}
-          <button
-            className={styles.searchBtn}
-            aria-label="Search"
-            onClick={() => {
-              /* TODO: Open search modal */
-            }}
-          >
+          <button className={styles.searchBtn} aria-label="Search" onClick={() => setSearchModalOpen(true)}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path
                 d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35"
@@ -171,6 +180,9 @@ export const Header: React.FC<HeaderProps> = ({ locale = 'zh-cn', currentPath = 
           triggerRef={headerRef}
         />
       )}
+
+      {/* Search Modal */}
+      <SearchModal isOpen={searchModalOpen} onClose={() => setSearchModalOpen(false)} locale={locale} />
     </header>
   );
 };

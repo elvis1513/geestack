@@ -16,6 +16,7 @@ import { ProductsPage } from '../pages/products';
 import { ResourcesPage } from '../pages/resources';
 import { CasesPage } from '../pages/cases';
 import { ContactPage } from '../pages/contact';
+import { SearchPage } from '../pages/search';
 import { NotFoundPage } from '../pages/not-found';
 import type { HeaderProps } from '../layout/Header';
 import type { FooterProps } from '../layout/Footer';
@@ -82,6 +83,8 @@ export const SiteEntry: React.FC<SiteEntryProps> = ({ locale: initialLocale = 'z
     switch (routeKey) {
       case 'not-found':
         return <NotFoundPage locale={locale} />;
+      case 'search':
+        return <SearchPage locale={locale} />;
       case 'contact':
         return <ContactPage locale={locale} />;
       case 'cases':
