@@ -43,7 +43,6 @@ const RESOURCES = {
       type: 'whitepaper',
       size: 'PDF · 3.2MB',
       date: '2024-12-15',
-      gradient: 'linear-gradient(135deg, #1890FF 0%, #36CFC9 100%)',
     },
     {
       id: 2,
@@ -52,7 +51,6 @@ const RESOURCES = {
       type: 'technical',
       size: 'PDF · 2.8MB',
       date: '2024-12-10',
-      gradient: 'linear-gradient(135deg, #52C41A 0%, #95DE64 100%)',
     },
     {
       id: 3,
@@ -61,7 +59,6 @@ const RESOURCES = {
       type: 'case',
       size: 'PDF · 4.1MB',
       date: '2024-12-05',
-      gradient: 'linear-gradient(135deg, #F70000 0%, #FF4D4F 100%)',
     },
     {
       id: 4,
@@ -70,7 +67,6 @@ const RESOURCES = {
       type: 'video',
       size: 'MP4 · 15:30',
       date: '2024-11-28',
-      gradient: 'linear-gradient(135deg, #722ED1 0%, #B37FEB 100%)',
     },
     {
       id: 5,
@@ -79,7 +75,6 @@ const RESOURCES = {
       type: 'technical',
       size: 'PDF · 2.1MB',
       date: '2024-11-20',
-      gradient: 'linear-gradient(135deg, #52C41A 0%, #95DE64 100%)',
     },
     {
       id: 6,
@@ -88,7 +83,6 @@ const RESOURCES = {
       type: 'whitepaper',
       size: 'PDF · 3.5MB',
       date: '2024-11-15',
-      gradient: 'linear-gradient(135deg, #1890FF 0%, #36CFC9 100%)',
     },
   ],
   en: [
@@ -99,7 +93,6 @@ const RESOURCES = {
       type: 'whitepaper',
       size: 'PDF · 3.2MB',
       date: '2024-12-15',
-      gradient: 'linear-gradient(135deg, #1890FF 0%, #36CFC9 100%)',
     },
     {
       id: 2,
@@ -108,7 +101,6 @@ const RESOURCES = {
       type: 'technical',
       size: 'PDF · 2.8MB',
       date: '2024-12-10',
-      gradient: 'linear-gradient(135deg, #52C41A 0%, #95DE64 100%)',
     },
     {
       id: 3,
@@ -117,7 +109,6 @@ const RESOURCES = {
       type: 'case',
       size: 'PDF · 4.1MB',
       date: '2024-12-05',
-      gradient: 'linear-gradient(135deg, #F70000 0%, #FF4D4F 100%)',
     },
     {
       id: 4,
@@ -126,7 +117,6 @@ const RESOURCES = {
       type: 'video',
       size: 'MP4 · 15:30',
       date: '2024-11-28',
-      gradient: 'linear-gradient(135deg, #722ED1 0%, #B37FEB 100%)',
     },
     {
       id: 5,
@@ -135,7 +125,6 @@ const RESOURCES = {
       type: 'technical',
       size: 'PDF · 2.1MB',
       date: '2024-11-20',
-      gradient: 'linear-gradient(135deg, #52C41A 0%, #95DE64 100%)',
     },
     {
       id: 6,
@@ -144,7 +133,6 @@ const RESOURCES = {
       type: 'whitepaper',
       size: 'PDF · 3.5MB',
       date: '2024-11-15',
-      gradient: 'linear-gradient(135deg, #1890FF 0%, #36CFC9 100%)',
     },
   ],
 };
@@ -173,7 +161,6 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ locale = 'zh-cn' }
                 type={resource.type}
                 size={resource.size}
                 date={resource.date}
-                gradient={resource.gradient}
                 locale={locale}
               />
             ))}

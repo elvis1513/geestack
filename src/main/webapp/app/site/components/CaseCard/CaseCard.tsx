@@ -10,7 +10,8 @@ export interface CaseCardProps {
   title: string;
   description: string;
   industry: string;
-  gradient: string;
+  image: string;
+  link?: string;
   locale?: 'zh-cn' | 'en';
 }
 
@@ -42,13 +43,13 @@ const INDUSTRY_COLORS: Record<string, string> = {
   energy: '#13C2C2',
 };
 
-export const CaseCard: React.FC<CaseCardProps> = ({ customer, title, description, industry, gradient, locale = 'zh-cn' }) => {
+export const CaseCard: React.FC<CaseCardProps> = ({ customer, title, description, industry, image, link, locale = 'zh-cn' }) => {
   const industryLabel = INDUSTRY_LABELS[locale][industry];
   const industryColor = INDUSTRY_COLORS[industry];
 
-  return (
-    <div className={styles.card}>
-      <div className={styles.image} style={{ background: gradient }} />
+  const cardContent = (
+    <>
+      <div className={styles.image} style={{ backgroundImage: `url(${image})` }} />
       <div className={styles.content}>
         <span className={styles.industry} style={{ color: industryColor }}>
           {industryLabel}
@@ -60,8 +61,18 @@ export const CaseCard: React.FC<CaseCardProps> = ({ customer, title, description
           {locale === 'zh-cn' ? '查看详情' : 'View Details'} →
         </button>
       </div>
-    </div>
+    </>
   );
+
+  if (link) {
+    return (
+      <a href={link} className={styles.cardLink}>
+        {cardContent}
+      </a>
+    );
+  }
+
+  return <div className={styles.card}>{cardContent}</div>;
 };
 
 export default CaseCard;
