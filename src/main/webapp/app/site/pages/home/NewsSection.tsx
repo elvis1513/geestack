@@ -17,47 +17,56 @@ const NEWS_ITEMS = {
   'zh-cn': [
     {
       id: 1,
-      title: 'GeeStack发布企业数智化转型白皮书',
-      date: '2025-01-03',
-      summary: '深度解析企业数智化转型路径，分享GeeStack在全栈算力解决方案领域的最佳实践',
-      link: '/cn/news/whitepaper-2025',
+      title: '超聚变亮相2025集团企业数智化技术创新与生态大会，共探业务变革与AI落地实践',
+      date: '2025-12-30',
+      summary: '超聚变受邀参加2025集团企业数智化技术创新与生态大会，与行业专家共同探讨业务变革与AI落地实践',
+      link: '/cn/news/innovation-eco-conference',
+      image: '/content/images/news/news-innovation-conference.jpg',
     },
     {
       id: 2,
-      title: 'GeeStack xERP 3.0正式发布，助力企业核心管理升级',
-      date: '2024-12-28',
-      summary: '全新一代企业核心经营管理系统，融入AI智能体，提升企业运营效率',
-      link: '/cn/news/xerp-3.0',
+      title: '超聚变获评中国软件高质量发展百强企业',
+      date: '2025-11-17',
+      summary: '凭借在软件领域的创新能力和高质量发展成果，超聚变荣获中国软件高质量发展百强企业称号',
+      link: '/cn/news/top100-award',
+      image: '/content/images/news/news-top100.jpg',
     },
     {
       id: 3,
-      title: 'GeeStack智算中心解决方案斩获行业大奖',
-      date: '2024-12-20',
-      summary: '凭借创新的云边智融合架构和卓越的AI算力调度能力获得认可',
-      link: '/cn/news/award-2024',
+      title: '超聚变携手超图软件：以一体化行业落地解决方案赋能GIS智能化转型',
+      date: '2025-12-26',
+      summary: '超聚变与超图软件达成战略合作，共同打造一体化行业解决方案，推动GIS智能化转型',
+      link: '/cn/news/supermap-partnership',
+      image: '/content/images/news/news-supermap.jpg',
     },
   ],
   en: [
     {
       id: 1,
-      title: 'GeeStack Releases Enterprise Digital Transformation Whitepaper',
-      date: '2025-01-03',
-      summary: 'In-depth analysis of enterprise transformation paths, sharing best practices in full-stack computing solutions',
-      link: '/en/news/whitepaper-2025',
+      title: 'xFusion at 2025 Enterprise Digital Innovation Conference',
+      date: '2025-12-30',
+      summary:
+        'xFusion participated in the 2025 Enterprise Digital Innovation Conference to explore business transformation and AI implementation',
+      link: '/en/news/innovation-eco-conference',
+      image: '/content/images/news/news-innovation-conference.jpg',
     },
     {
       id: 2,
-      title: 'GeeStack xERP 3.0 Official Launch, Upgrading Core Enterprise Management',
-      date: '2024-12-28',
-      summary: 'Next-generation enterprise core management system with integrated AI agents for improved operational efficiency',
-      link: '/en/news/xerp-3.0',
+      title: 'xFusion Named Top 100 High-Quality Software Enterprise in China',
+      date: '2025-11-17',
+      summary:
+        'xFusion was recognized as a Top 100 High-Quality Software Enterprise for its innovation and excellence in software development',
+      link: '/en/news/top100-award',
+      image: '/content/images/news/news-top100.jpg',
     },
     {
       id: 3,
-      title: 'GeeStack Intelligent Computing Center Solution Wins Industry Award',
-      date: '2024-12-20',
-      summary: 'Recognized for innovative cloud-edge-AI fusion architecture and exceptional AI computing scheduling capabilities',
-      link: '/en/news/award-2024',
+      title: 'xFusion Partners with SuperMap to Enable GIS Intelligence',
+      date: '2025-12-26',
+      summary:
+        'xFusion and SuperMap formed a strategic partnership to deliver integrated industry solutions for GIS intelligent transformation',
+      link: '/en/news/supermap-partnership',
+      image: '/content/images/news/news-supermap.jpg',
     },
   ],
 };
@@ -78,9 +87,12 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ locale = 'zh-cn' }) =>
       <div className={styles.grid}>
         {news.map(item => (
           <a key={item.id} href={item.link} className={styles.newsCard}>
-            <span className={styles.date}>{item.date}</span>
-            <h3 className={styles.newsTitle}>{item.title}</h3>
-            <p className={styles.newsSummary}>{item.summary}</p>
+            <div className={styles.image} style={{ backgroundImage: `url(${item.image})` }} />
+            <div className={styles.content}>
+              <span className={styles.date}>{item.date}</span>
+              <h3 className={styles.newsTitle}>{item.title}</h3>
+              <p className={styles.newsSummary}>{item.summary}</p>
+            </div>
           </a>
         ))}
       </div>

@@ -14,58 +14,74 @@ export interface HeroSectionProps {
   locale?: 'zh-cn' | 'en';
 }
 
-// Hero slides with gradient backgrounds matching xFusion brand style
+// Hero slides with background images from xFusion
 const HERO_SLIDES = {
   'zh-cn': [
     {
       id: 1,
-      title: '让智算数能更好地服务您',
-      subtitle: 'GeeStack致力于提供领先的算力网络解决方案',
-      cta: '了解更多',
-      ctaLink: '/cn/solutions',
-      gradient: 'linear-gradient(135deg, #0a1929 0%, #1a2332 50%, #2c3e50 100%)',
+      title: 'xFusionPark算力集群',
+      subtitle: '新一代算力集群解决方案，助力AI行业应用落地',
+      cta: '了解详情',
+      ctaLink: '/cn/products/xfusionpark',
+      image: '/content/images/hero/hero-carousel-1.jpg',
     },
     {
       id: 2,
-      title: '全栈算力解决方案',
-      subtitle: '云、边、智融合的全栈算力解决方案产品与服务',
-      cta: '查看产品',
-      ctaLink: '/cn/products',
-      gradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+      title: '超聚变工作站X3 8000',
+      subtitle: '专业级工作站，释放极致创造力',
+      cta: '了解详情',
+      ctaLink: '/cn/products/station-x3-8000',
+      image: '/content/images/hero/hero-carousel-2.png',
     },
     {
       id: 3,
-      title: '绿色智慧能源',
-      subtitle: '全系列产品，全场景补能',
-      cta: '探索方案',
-      ctaLink: '/cn/energy',
-      gradient: 'linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%)',
+      title: '分体式智能充电系统',
+      subtitle: '全系列产品，全场景补能解决方案',
+      cta: '了解详情',
+      ctaLink: '/cn/products/smart-energy',
+      image: '/content/images/hero/hero-carousel-3.png',
+    },
+    {
+      id: 4,
+      title: '智企1.0数智化转型',
+      subtitle: 'AI大模型在企业落地实践，开启业务变革新篇章',
+      cta: '了解详情',
+      ctaLink: '/cn/cases/ai-enterprise',
+      image: '/content/images/hero/hero-carousel-4.png',
     },
   ],
   en: [
     {
       id: 1,
-      title: 'Empowering Digital Intelligence',
-      subtitle: 'Leading computing network solutions for the AI era',
+      title: 'xFusionPark Computing Cluster',
+      subtitle: 'Next-generation computing cluster solutions for AI industry applications',
       cta: 'Learn More',
-      ctaLink: '/en/solutions',
-      gradient: 'linear-gradient(135deg, #0a1929 0%, #1a2332 50%, #2c3e50 100%)',
+      ctaLink: '/en/products/xfusionpark',
+      image: '/content/images/hero/hero-carousel-1.jpg',
     },
     {
       id: 2,
-      title: 'Full-Stack Computing Solutions',
-      subtitle: 'Cloud-edge-AI integrated computing infrastructure',
-      cta: 'View Products',
-      ctaLink: '/en/products',
-      gradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+      title: 'xFusion Station X3 8000',
+      subtitle: 'Professional workstation for ultimate creativity',
+      cta: 'Learn More',
+      ctaLink: '/en/products/station-x3-8000',
+      image: '/content/images/hero/hero-carousel-2.png',
     },
     {
       id: 3,
-      title: 'Green Energy Solutions',
-      subtitle: 'Complete product line for all scenarios',
-      cta: 'Explore',
-      ctaLink: '/en/energy',
-      gradient: 'linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%)',
+      title: 'Distributed Intelligent Charging System',
+      subtitle: 'Complete product line for all charging scenarios',
+      cta: 'Learn More',
+      ctaLink: '/en/products/smart-energy',
+      image: '/content/images/hero/hero-carousel-3.png',
+    },
+    {
+      id: 4,
+      title: 'Enterprise Intelligence 1.0',
+      subtitle: 'AI large model implementation for business transformation',
+      cta: 'Learn More',
+      ctaLink: '/en/cases/ai-enterprise',
+      image: '/content/images/hero/hero-carousel-4.png',
     },
   ],
 };
@@ -125,7 +141,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ locale = 'zh-cn' }) =>
           <div
             key={slide.id}
             className={`${styles.slide} ${index === currentIndex ? styles.active : ''}`}
-            style={{ background: slide.gradient }}
+            style={{ backgroundImage: `url(${slide.image})` }}
             aria-hidden={index !== currentIndex}
           >
             <div className={styles.overlay}>

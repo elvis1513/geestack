@@ -8,11 +8,22 @@
   border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+  cursor: pointer;
+}
+
+.cardLink {
+  display: block;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
   text-decoration: none;
   transition: all var(--motion-duration-fast) var(--motion-easing-standard);
   cursor: pointer;
 }
 
+.cardLink:hover,
 .card:hover {
   border-color: var(--color-link-hover);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);

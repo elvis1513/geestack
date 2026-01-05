@@ -17,7 +17,7 @@ export interface ProductsPageProps {
   locale?: 'zh-cn' | 'en';
 }
 
-// Static product data (placeholder)
+// Static product data matching xFusion structure
 const PRODUCT_CATEGORIES = {
   'zh-cn': [
     {
@@ -26,69 +26,63 @@ const PRODUCT_CATEGORIES = {
       products: [
         {
           id: 1,
-          title: '机架式服务器',
-          description: '高性能机架式服务器，支撑企业核心业务',
-          gradient: 'linear-gradient(135deg, #1a2332 0%, #2c3e50 100%)',
+          title: '2288H V7',
+          description: '机架服务器，适用于云计算、虚拟化、高性能计算、数据库等场景',
+          image: '/content/images/products/rack-server.png',
+          link: '/cn/products/servers/2288h-v7',
         },
         {
           id: 2,
-          title: '刀片服务器',
-          description: '高密度刀片服务器，节省数据中心空间',
-          gradient: 'linear-gradient(135deg, #16213e 0%, #0f3460 100%)',
+          title: 'FusionServer G5200 V7',
+          description: 'AI服务器，为AI训练、AI推理、HPC、图片视频分析等应用加速',
+          image: '/content/images/products/ai-server.png',
+          link: '/cn/products/servers/g5200-v7',
         },
         {
           id: 3,
-          title: '高性能服务器',
-          description: 'AI训练与HPC优化，极致算力性能',
-          gradient: 'linear-gradient(135deg, #0d1b2a 0%, #415a77 100%)',
+          title: 'FusionPoD',
+          description: '整机柜液冷服务器，商用液冷新标杆，高密算力新旗舰',
+          image: '/content/images/products/rack-scale-server.png',
+          link: '/cn/products/servers/fusionpod',
         },
       ],
     },
     {
-      id: 'storage',
-      title: '存储',
+      id: 'ai-engine',
+      title: '大模型加速引擎',
       products: [
         {
           id: 4,
-          title: '全闪存存储',
-          description: '超低延迟，极致性能',
-          gradient: 'linear-gradient(135deg, #134e5e 0%, #71b280 100%)',
-        },
-        {
-          id: 5,
-          title: '混合存储',
-          description: '性能与容量的完美平衡',
-          gradient: 'linear-gradient(135deg, #1d976c 0%, #93f9b9 100%)',
-        },
-        {
-          id: 6,
-          title: '分布式存储',
-          description: '弹性扩展，海量数据管理',
-          gradient: 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',
+          title: 'AI加速引擎',
+          description: '大模型训练与推理加速，释放AI算力潜能',
+          image: '/content/images/icons/ai-engine.svg',
+          link: '/cn/products/ai-engine',
         },
       ],
     },
     {
-      id: 'network',
-      title: '网络',
+      id: 'hci',
+      title: '超融合解决方案',
       products: [
         {
-          id: 7,
-          title: '交换机',
-          description: '高性能数据中心交换机',
-          gradient: 'linear-gradient(135deg, #2c3e50 0%, #3498db 100%)',
+          id: 5,
+          title: 'FusionOne HCI',
+          description: '极简、智能、可靠的超融合基础设施',
+          image: '/content/images/icons/hci-solution.svg',
+          link: '/cn/products/hci',
         },
+      ],
+    },
+    {
+      id: 'hpc',
+      title: '高性能计算解决方案',
+      products: [
         {
-          id: 8,
-          title: '路由器',
-          description: '智能路由，高效转发',
-          gradient: 'linear-gradient(135deg, #34495e 0%, #2ecc71 100%)',
-        },
-        {
-          id: 9,
-          title: '无线网络',
-          description: 'Wi-Fi 6/6E，全场景覆盖',
-          gradient: 'linear-gradient(135deg, #1a1a2e 0%, #e94560 100%)',
+          id: 6,
+          title: 'HPC解决方案',
+          description: '全栈HPC解决方案，助力科学研究与工程创新',
+          image: '/content/images/icons/hpc-solution.svg',
+          link: '/cn/products/hpc',
         },
       ],
     },
@@ -100,115 +94,115 @@ const PRODUCT_CATEGORIES = {
       products: [
         {
           id: 1,
-          title: 'Rack Servers',
-          description: 'High-performance rack servers for core business',
-          gradient: 'linear-gradient(135deg, #1a2332 0%, #2c3e50 100%)',
+          title: '2288H V7',
+          description: 'Rack server for cloud, virtualization, HPC, database workloads',
+          image: '/content/images/products/rack-server.png',
+          link: '/en/products/servers/2288h-v7',
         },
         {
           id: 2,
-          title: 'Blade Servers',
-          description: 'High-density blade servers, space-saving',
-          gradient: 'linear-gradient(135deg, #16213e 0%, #0f3460 100%)',
+          title: 'FusionServer G5200 V7',
+          description: 'AI server for AI training, inference, HPC, and video analytics',
+          image: '/content/images/products/ai-server.png',
+          link: '/en/products/servers/g5200-v7',
         },
         {
           id: 3,
-          title: 'HPC Servers',
-          description: 'Optimized for AI training and HPC',
-          gradient: 'linear-gradient(135deg, #0d1b2a 0%, #415a77 100%)',
+          title: 'FusionPoD',
+          description: 'Rack-scale liquid-cooled server, commercial liquid cooling benchmark',
+          image: '/content/images/products/rack-scale-server.png',
+          link: '/en/products/servers/fusionpod',
         },
       ],
     },
     {
-      id: 'storage',
-      title: 'Storage',
+      id: 'ai-engine',
+      title: 'AI Engine',
       products: [
         {
           id: 4,
-          title: 'All-Flash Storage',
-          description: 'Ultra-low latency, extreme performance',
-          gradient: 'linear-gradient(135deg, #134e5e 0%, #71b280 100%)',
-        },
-        {
-          id: 5,
-          title: 'Hybrid Storage',
-          description: 'Perfect balance of performance and capacity',
-          gradient: 'linear-gradient(135deg, #1d976c 0%, #93f9b9 100%)',
-        },
-        {
-          id: 6,
-          title: 'Distributed Storage',
-          description: 'Elastic scalability for massive data',
-          gradient: 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',
+          title: 'AI Acceleration Engine',
+          description: 'LLM training and inference acceleration',
+          image: '/content/images/icons/ai-engine.svg',
+          link: '/en/products/ai-engine',
         },
       ],
     },
     {
-      id: 'network',
-      title: 'Network',
+      id: 'hci',
+      title: 'HCI Solutions',
       products: [
         {
-          id: 7,
-          title: 'Switches',
-          description: 'High-performance datacenter switches',
-          gradient: 'linear-gradient(135deg, #2c3e50 0%, #3498db 100%)',
+          id: 5,
+          title: 'FusionOne HCI',
+          description: 'Simple, intelligent, reliable HCI infrastructure',
+          image: '/content/images/icons/hci-solution.svg',
+          link: '/en/products/hci',
         },
+      ],
+    },
+    {
+      id: 'hpc',
+      title: 'HPC Solutions',
+      products: [
         {
-          id: 8,
-          title: 'Routers',
-          description: 'Intelligent routing, efficient forwarding',
-          gradient: 'linear-gradient(135deg, #34495e 0%, #2ecc71 100%)',
-        },
-        {
-          id: 9,
-          title: 'Wireless Network',
-          description: 'Wi-Fi 6/6E, full scenario coverage',
-          gradient: 'linear-gradient(135deg, #1a1a2e 0%, #e94560 100%)',
+          id: 6,
+          title: 'HPC Solution',
+          description: 'Full-stack HPC solutions for scientific research',
+          image: '/content/images/icons/hpc-solution.svg',
+          link: '/en/products/hpc',
         },
       ],
     },
   ],
 };
 
-// Solutions data
+// Solutions data matching xFusion structure
 const SOLUTIONS = {
   'zh-cn': [
     {
       id: 1,
-      title: '智算中心解决方案',
-      description: '全栈算力基础设施，助力AI时代',
-      icon: '🖥️',
+      title: '城企数智解决方案',
+      description: '企业数智化平台、核心水平商业应用与智能体、业务变革与业务设计咨询',
+      icon: '/content/images/icons/hci-solution.svg',
+      link: '/cn/solutions/digital',
     },
     {
       id: 2,
-      title: '云服务解决方案',
-      description: '弹性云平台，快速业务上线',
-      icon: '☁️',
+      title: '算力产品与解决方案',
+      description: '云、边、智融合的全栈算力解决方案产品与服务',
+      icon: '/content/images/icons/server.svg',
+      link: '/cn/solutions/computing',
     },
     {
       id: 3,
-      title: '边缘计算解决方案',
-      description: '云边协同，降低时延',
-      icon: '🌐',
+      title: '能源智慧解决方案',
+      description: '全系列产品，全场景补能',
+      icon: '/content/images/icons/hpc-solution.svg',
+      link: '/cn/solutions/energy',
     },
   ],
   en: [
     {
       id: 1,
-      title: 'Intelligent Computing',
-      description: 'Full-stack computing infrastructure for AI era',
-      icon: '🖥️',
+      title: 'Enterprise Digital Solutions',
+      description: 'Enterprise digital platforms, business applications, AI agents',
+      icon: '/content/images/icons/hci-solution.svg',
+      link: '/en/solutions/digital',
     },
     {
       id: 2,
-      title: 'Cloud Services',
-      description: 'Elastic cloud platform for rapid deployment',
-      icon: '☁️',
+      title: 'Computing Solutions',
+      description: 'Cloud-edge-AI integrated full-stack computing solutions',
+      icon: '/content/images/icons/server.svg',
+      link: '/en/solutions/computing',
     },
     {
       id: 3,
-      title: 'Edge Computing',
-      description: 'Cloud-edge collaboration, reduced latency',
-      icon: '🌐',
+      title: 'Energy Solutions',
+      description: 'Full product lineup for all charging scenarios',
+      icon: '/content/images/icons/hpc-solution.svg',
+      link: '/en/solutions/energy',
     },
   ],
 };
@@ -234,7 +228,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ locale = 'zh-cn' }) 
                 key={product.id}
                 title={product.title}
                 description={product.description}
-                image={product.gradient}
+                image={product.image}
+                link={product.link}
                 locale={locale}
               />
             ))}
@@ -253,6 +248,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ locale = 'zh-cn' }) 
                 title={solution.title}
                 description={solution.description}
                 icon={solution.icon}
+                link={solution.link}
                 locale={locale}
               />
             ))}

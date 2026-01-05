@@ -18,46 +18,74 @@ const PRODUCTS = {
     {
       id: 1,
       title: '服务器',
-      description: '高性能服务器，支撑智算底座',
-      image: 'linear-gradient(135deg, #1a2332 0%, #2c3e50 100%)',
+      description: '机架服务器、AI服务器、整机柜服务器',
+      icon: '/content/images/icons/server.svg',
       link: '/cn/products/servers',
     },
     {
       id: 2,
-      title: '存储',
-      description: '全场景数据存储解决方案',
-      image: 'linear-gradient(135deg, #16213e 0%, #0f3460 100%)',
-      link: '/cn/products/storage',
+      title: '操作系统',
+      description: '企业级Linux操作系统',
+      icon: '/content/images/icons/system.svg',
+      link: '/cn/products/os',
     },
     {
       id: 3,
-      title: '网络',
-      description: '智能网络，联接未来',
-      image: 'linear-gradient(135deg, #0d1b2a 0%, #415a77 100%)',
-      link: '/cn/products/network',
+      title: '大模型加速引擎',
+      description: 'AI大模型加速与优化',
+      icon: '/content/images/icons/ai-engine.svg',
+      link: '/cn/products/ai-engine',
+    },
+    {
+      id: 4,
+      title: '超融合解决方案',
+      description: '极简、智能、可靠的超融合基础设施',
+      icon: '/content/images/icons/hci-solution.svg',
+      link: '/cn/products/hci',
+    },
+    {
+      id: 5,
+      title: '高性能计算解决方案',
+      description: 'HPC全栈解决方案',
+      icon: '/content/images/icons/hpc-solution.svg',
+      link: '/cn/products/hpc',
     },
   ],
   en: [
     {
       id: 1,
       title: 'Servers',
-      description: 'High-performance servers for AI computing',
-      image: 'linear-gradient(135deg, #1a2332 0%, #2c3e50 100%)',
+      description: 'Rack servers, AI servers, rack-scale servers',
+      icon: '/content/images/icons/server.svg',
       link: '/en/products/servers',
     },
     {
       id: 2,
-      title: 'Storage',
-      description: 'All-scenario data storage solutions',
-      image: 'linear-gradient(135deg, #16213e 0%, #0f3460 100%)',
-      link: '/en/products/storage',
+      title: 'Operating System',
+      description: 'Enterprise-grade Linux operating system',
+      icon: '/content/images/icons/system.svg',
+      link: '/en/products/os',
     },
     {
       id: 3,
-      title: 'Network',
-      description: 'Intelligent networking for the future',
-      image: 'linear-gradient(135deg, #0d1b2a 0%, #415a77 100%)',
-      link: '/en/products/network',
+      title: 'AI Acceleration Engine',
+      description: 'AI model acceleration and optimization',
+      icon: '/content/images/icons/ai-engine.svg',
+      link: '/en/products/ai-engine',
+    },
+    {
+      id: 4,
+      title: 'HCI Solutions',
+      description: 'Simple, intelligent, reliable HCI infrastructure',
+      icon: '/content/images/icons/hci-solution.svg',
+      link: '/en/products/hci',
+    },
+    {
+      id: 5,
+      title: 'HPC Solutions',
+      description: 'Full-stack HPC solutions',
+      icon: '/content/images/icons/hpc-solution.svg',
+      link: '/en/products/hpc',
     },
   ],
 };
@@ -85,7 +113,9 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ locale = 'zh-c
       <div className={styles.grid}>
         {products.map(product => (
           <a key={product.id} href={product.link} className={styles.card}>
-            <div className={styles.image} style={{ background: product.image }} />
+            <div className={styles.iconWrapper}>
+              <img src={product.icon} alt={product.title} className={styles.icon} />
+            </div>
             <div className={styles.content}>
               <h3 className={styles.cardTitle}>{product.title}</h3>
               <p className={styles.cardDescription}>{product.description}</p>
