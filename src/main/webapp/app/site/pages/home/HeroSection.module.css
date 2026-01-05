@@ -80,16 +80,17 @@
   font-size: 16px;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-inverse);
-  background: var(--color-cta-primary);
-  border-radius: 4px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-radius: 8px;
   text-decoration: none;
   transition: all var(--motion-duration-fast) var(--motion-easing-standard);
   animation: slideUp var(--motion-duration-slow) var(--motion-easing-out) 200ms backwards;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
 .cta:hover {
-  background: var(--color-cta-primary-hover);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
   transform: translateY(-2px);
 }
 
