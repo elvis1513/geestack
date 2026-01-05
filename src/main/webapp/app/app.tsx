@@ -19,7 +19,15 @@ const AppContent = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getSession());
+    // 只在需要认证的路由时才检查会话（管理后台等）
+    // 公共网站（/cn/*, /en/*）不需要认证检查
+    const currentPath = window.location.pathname;
+    const needsAuth = currentPath.startsWith('/admin');
+
+    if (needsAuth) {
+      dispatch(getSession());
+    }
+    // getProfile() 获取应用配置信息，公共网站也需要
     dispatch(getProfile());
   }, []);
 
