@@ -46,7 +46,10 @@ public class SecurityConfiguration {
             .headers(headers ->
                 headers
                     .contentSecurityPolicy(csp -> csp.policyDirectives(jHipsterProperties.getSecurity().getContentSecurityPolicy()))
-                    .frameOptions(FrameOptionsConfig::sameOrigin)
+                    .frameOptions(frame -> frame.deny())
+                    .httpStrictTransportSecurity(hsts -> hsts.includeSubDomains(true).maxAgeInSeconds(31536000).preload(true))
+                    .xssProtection(xss -> xss.disable())
+                    .contentTypeOptions(content -> content.disable())
                     .referrerPolicy(referrer -> referrer.policy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN))
                     .permissionsPolicyHeader(permissions ->
                         permissions.policy(
@@ -62,6 +65,7 @@ public class SecurityConfiguration {
                     .requestMatchers(mvc.pattern("/app/**")).permitAll()
                     .requestMatchers(mvc.pattern("/i18n/**")).permitAll()
                     .requestMatchers(mvc.pattern("/content/**")).permitAll()
+                    .requestMatchers(mvc.pattern("/seo/**")).permitAll()
                     .requestMatchers(mvc.pattern("/swagger-ui/**")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()

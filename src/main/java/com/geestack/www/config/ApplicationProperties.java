@@ -13,7 +13,17 @@ public class ApplicationProperties {
 
     private final Liquibase liquibase = new Liquibase();
 
+    private String baseUrl;
+
     // jhipster-needle-application-properties-property
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
 
     public Liquibase getLiquibase() {
         return liquibase;

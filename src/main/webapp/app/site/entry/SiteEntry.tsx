@@ -7,27 +7,40 @@
  * Source: AGENTS.md Chapter 6 - Entry Container
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { Header } from '../layout/Header';
 import { Footer } from '../layout/Footer';
-import { Locale } from '../navigation/config';
-import { HomePage } from '../pages/home';
-import { ProductsPage } from '../pages/products';
-import { ResourcesPage } from '../pages/resources';
-import { CasesPage } from '../pages/cases';
-import { ContactPage } from '../pages/contact';
-import { SearchPage } from '../pages/search';
-import { NotFoundPage } from '../pages/not-found';
+import { Locale, RouteKey } from '../navigation/config';
+import { MetaTags } from '../seo/MetaTags';
+import { useSEOMetadata } from '../seo/hooks/useSEOMetadata';
 import type { HeaderProps } from '../layout/Header';
 import type { FooterProps } from '../layout/Footer';
 import * as styles from './SiteEntry.module.css';
+
+// Code splitting with React.lazy for better performance
+// Each page component will be loaded on-demand
+const HomePage = lazy(() => import('../pages/home').then(m => ({ default: m.HomePage })));
+const ProductsPage = lazy(() => import('../pages/products').then(m => ({ default: m.ProductsPage })));
+const ResourcesPage = lazy(() => import('../pages/resources').then(m => ({ default: m.ResourcesPage })));
+const CasesPage = lazy(() => import('../pages/cases').then(m => ({ default: m.CasesPage })));
+const ContactPage = lazy(() => import('../pages/contact').then(m => ({ default: m.ContactPage })));
+const SearchPage = lazy(() => import('../pages/search').then(m => ({ default: m.SearchPage })));
+const NotFoundPage = lazy(() => import('../pages/not-found').then(m => ({ default: m.NotFoundPage })));
+
+// Loading fallback component for lazy-loaded pages
+const PageLoader: React.FC = () => (
+  <div className={styles.pageLoader} role="status" aria-label="Loading page">
+    <div className={styles.spinner} aria-hidden="true"></div>
+  </div>
+);
 
 export interface SiteEntryProps {
   locale?: Locale;
   routeKey?: string;
 }
 
-export const SiteEntry: React.FC<SiteEntryProps> = ({ locale: initialLocale = 'zh-cn', routeKey = 'home' }) => {
+const SiteEntryContent: React.FC<SiteEntryProps> = ({ locale: initialLocale = 'zh-cn', routeKey: routeKeyProp = 'home' }) => {
   const [locale, setLocale] = useState<Locale>(initialLocale);
 
   // Detect locale from URL path
@@ -44,6 +57,11 @@ export const SiteEntry: React.FC<SiteEntryProps> = ({ locale: initialLocale = 'z
       }
     }
   }, []);
+
+  // Get SEO metadata
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  const routeKey: RouteKey = routeKeyProp as RouteKey;
+  const seo = useSEOMetadata({ routeKey, locale });
 
   // Handle locale change
   const handleLocaleChange = (newLocale: Locale) => {
@@ -78,39 +96,80 @@ export const SiteEntry: React.FC<SiteEntryProps> = ({ locale: initialLocale = 'z
 
   const currentPath = getCurrentPath();
 
-  // Render page based on routeKey
+  // Render page based on routeKey with Suspense for lazy loading
   const renderPage = () => {
     switch (routeKey) {
       case 'not-found':
-        return <NotFoundPage locale={locale} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <NotFoundPage locale={locale} />
+          </Suspense>
+        );
       case 'search':
-        return <SearchPage locale={locale} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <SearchPage locale={locale} />
+          </Suspense>
+        );
       case 'contact':
-        return <ContactPage locale={locale} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <ContactPage locale={locale} />
+          </Suspense>
+        );
       case 'cases':
-        return <CasesPage locale={locale} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <CasesPage locale={locale} />
+          </Suspense>
+        );
       case 'resources':
-        return <ResourcesPage locale={locale} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <ResourcesPage locale={locale} />
+          </Suspense>
+        );
       case 'products':
-        return <ProductsPage locale={locale} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <ProductsPage locale={locale} />
+          </Suspense>
+        );
       case 'home':
       default:
-        return <HomePage locale={locale} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <HomePage locale={locale} />
+          </Suspense>
+        );
     }
   };
 
   return (
-    <div className={styles.siteEntry}>
-      {/* Header */}
-      <Header locale={locale} currentPath={currentPath} onLocaleChange={handleLocaleChange} />
+    <>
+      {/* Meta tags for SEO */}
+      <MetaTags seo={seo} />
 
-      {/* Main Content */}
-      <main className={styles.main} role="main">
-        {renderPage()}
-      </main>
+      <div className={styles.siteEntry}>
+        {/* Header */}
+        <Header locale={locale} currentPath={currentPath} onLocaleChange={handleLocaleChange} />
 
-      {/* Footer */}
-      <Footer locale={locale} onLocaleChange={handleLocaleChange} />
-    </div>
+        {/* Main Content */}
+        <main className={styles.main} role="main">
+          {renderPage()}
+        </main>
+
+        {/* Footer */}
+        <Footer locale={locale} onLocaleChange={handleLocaleChange} />
+      </div>
+    </>
+  );
+};
+
+export const SiteEntry: React.FC<SiteEntryProps> = props => {
+  return (
+    <HelmetProvider>
+      <SiteEntryContent {...props} />
+    </HelmetProvider>
   );
 };

@@ -213,7 +213,10 @@ jhipster:
     license: unlicensed
     license-url:
   security:
-    content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:"
+    # Content Security Policy - Production grade configuration
+    # Note: 'unsafe-inline' is needed for React development, consider using nonce/hash in production
+    content-security-policy: "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; frame-src 'self' data: https://www.youtube.com; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https://api.github.com; worker-src 'self' blob:; upgrade-insecure-requests"
+    # Other security headers are configured in SecurityConfiguration.java
 
 # jhipster-needle-add-application-yaml-document
 ---
@@ -227,3 +230,6 @@ jhipster:
 # ===================================================================
 
 # application:
+application:
+  # SEO configuration
+  base-url: https://www.geestack.com # Base URL for canonical URLs and sitemap

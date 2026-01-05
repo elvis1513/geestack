@@ -51,6 +51,41 @@ module.exports = async () =>
     },
     optimization: {
       runtimeChunk: false,
+      // Advanced code splitting for better caching
+      splitChunks: {
+        chunks: 'all',
+        maxInitialRequests: 20,
+        maxAsyncRequests: 20,
+        cacheGroups: {
+          // Vendor chunk: third-party libraries
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            priority: 10,
+            reuseExistingChunk: true,
+          },
+          // React and ReactDOM: separate chunk for framework
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
+            name: 'react',
+            priority: 20,
+            reuseExistingChunk: true,
+          },
+          // Common UI libraries
+          ui: {
+            test: /[\\/]node_modules[\\/](@mui|@mui-material|@emotion|@redux)[\\/]/,
+            name: 'ui',
+            priority: 15,
+            reuseExistingChunk: true,
+          },
+          // Default group for other shared code
+          default: {
+            minChunks: 2,
+            priority: 5,
+            reuseExistingChunk: true,
+          },
+        },
+      },
       minimizer: [
         new TerserPlugin({
           terserOptions: {
@@ -75,6 +110,9 @@ module.exports = async () =>
               // Pending further investigation:
               // https://github.com/terser-js/terser/issues/120
               inline: 2,
+              // Drop console.log in production
+              drop_console: true,
+              drop_debugger: true,
             },
             mangle: {
               safari10: true,
