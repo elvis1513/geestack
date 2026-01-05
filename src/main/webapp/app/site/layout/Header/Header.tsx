@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({ locale = 'zh-cn', currentPath = 
   // Scroll handler for transparent → solid transition
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 16);
+      setIsScrolled(window.scrollY > 4); // 降低阈值从16到4，更快触发变色避免深色内容侵入
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
