@@ -11,7 +11,7 @@ import { MetaTagConfig } from '../types/seo';
 const SITE_NAME_ZH = '极栈 GeeStack';
 const SITE_NAME_EN = 'GeeStack';
 
-const DEFAULT_OG_IMAGE = '/images/og-default-1200x630.png';
+const DEFAULT_OG_IMAGE = '/content/images/og-default-1200x630.svg';
 
 export const pageMetaConfig: MetaTagConfig = {
   home: {

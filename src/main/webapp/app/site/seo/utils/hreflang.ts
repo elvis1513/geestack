@@ -11,18 +11,21 @@ import { HreflangEntry } from '../types/seo';
  * Generate hreflang entries for a page
  */
 export function generateHreflangEntries(path: string, locale: Locale): HreflangEntry[] {
+  // Get the path without locale prefix
+  const cleanPath = path.replace(/^\/(cn|en)/, '') || '/';
+
   const entries: HreflangEntry[] = [
     {
       locale: 'zh-CN',
-      href: getCanonicalUrl(path, 'zh-cn'),
+      href: getCanonicalUrl(cleanPath, 'zh-cn'),
     },
     {
       locale: 'en',
-      href: getCanonicalUrl(path, 'en'),
+      href: getCanonicalUrl(cleanPath, 'en'),
     },
     {
       locale: 'x-default',
-      href: getCanonicalUrl(path, 'zh-cn'), // Default to Chinese
+      href: getCanonicalUrl(cleanPath, 'zh-cn'), // Default to Chinese
     },
   ];
 

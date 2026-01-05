@@ -12,7 +12,7 @@ import { getCanonicalUrl } from '../utils/canonical';
 import { generateHreflangEntries } from '../utils/hreflang';
 import { generatePageSchemas } from '../utils/structuredData';
 
-const DEFAULT_OG_IMAGE = '/images/og-default-1200x630.png';
+const DEFAULT_OG_IMAGE = '/content/images/og-default-1200x630.svg';
 
 interface UseSEOMetadataParams {
   routeKey: RouteKey;
