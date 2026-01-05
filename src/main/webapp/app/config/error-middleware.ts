@@ -17,10 +17,16 @@ export default () => next => action => {
   if (DEVELOPMENT) {
     const { error } = action;
     if (error) {
-      console.error(`${action.type} caught at middleware with reason: ${JSON.stringify(error.message)}.`);
-      if (error.response && error.response.data) {
-        const message = getErrorMessage(error.response.data);
-        console.error(`Actual cause: ${message}`);
+      // 过滤认证相关的 401 错误（预期行为，不应输出到 console）
+      const isAuthError =
+        error.response?.status === 401 && (error.config?.url?.endsWith('api/account') || error.config?.url?.endsWith('api/authenticate'));
+
+      if (!isAuthError) {
+        console.error(`${action.type} caught at middleware with reason: ${JSON.stringify(error.message)}.`);
+        if (error.response && error.response.data) {
+          const message = getErrorMessage(error.response.data);
+          console.error(`Actual cause: ${message}`);
+        }
       }
     }
   }
